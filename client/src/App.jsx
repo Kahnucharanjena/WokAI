@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import "./App.css";
@@ -18,6 +17,9 @@ const initialMessages = [
 ];
 
 function App() {
+  const isEmbed =
+    new URLSearchParams(window.location.search).get("embed") === "1";
+
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -88,7 +90,6 @@ function App() {
               : JSON.stringify(botReply),
         },
       ]);
-
     } catch (error) {
       console.error("WokAI API Error:", error);
 
@@ -100,7 +101,6 @@ function App() {
             "I'm sorry! I'm having trouble connecting to the server. Please check whether the backend is running and try again.",
         },
       ]);
-
     } finally {
       setLoading(false);
       inputRef.current?.focus();
@@ -155,108 +155,79 @@ function App() {
   ];
 
   return (
-    <div className="wokai-app">
+    <div className={isEmbed ? "wokai-app embed-mode" : "wokai-app"}>
+      {/* Header is hidden when URL contains ?embed=1 */}
+      {!isEmbed && (
+        <header className="top-header">
+          <div className="brand">
+            <img
+              src="/the-wok-logo.png"
+              alt="The Wok Logo"
+              className="brand-logo"
+            />
 
-      {/* HEADER */}
-
-      <header className="top-header">
-
-        <div className="brand">
-
-          <img
-            src="/the-wok-logo.png"
-            alt="The Wok Logo"
-            className="brand-logo"
-          />
-
-          <div className="brand-text">
-            <h1>WokAI</h1>
-            <p>The Wok – Chinese Kitchen</p>
+            <div className="brand-text">
+              <h1>WokAI</h1>
+              <p>The Wok – Chinese Kitchen</p>
+            </div>
           </div>
 
-        </div>
+          <div className="header-actions">
+            <div className="online-status">
+              <span className="status-dot"></span>
+              Online
+            </div>
 
-        <div className="header-actions">
+            <button
+              className="new-chat-button"
+              onClick={handleNewChat}
+              disabled={loading}
+            >
+              + New Chat
+            </button>
 
-          <div className="online-status">
-            <span className="status-dot"></span>
-            Online
+            <a
+              href={WEBSITE_URL}
+              className="website-button"
+            >
+              Visit The Wok Website
+              <span>↗</span>
+            </a>
           </div>
+        </header>
+      )}
 
-          <button
-            className="new-chat-button"
-            onClick={handleNewChat}
-            disabled={loading}
-          >
-            + New Chat
-          </button>
-
-          {/* SAME TAB WEBSITE NAVIGATION */}
-
-          <a
-            href={WEBSITE_URL}
-            className="website-button"
-          >
-            Visit The Wok Website
-            <span>↗</span>
-          </a>
-
-        </div>
-
-      </header>
-
-      {/* CHAT AREA */}
-
-      <main
-        className="chat-area"
-        ref={chatAreaRef}
-      >
-
-        <div className="date-label">
-          TODAY
-        </div>
+      {/* Chat area */}
+      <main className="chat-area" ref={chatAreaRef}>
+        <div className="date-label">TODAY</div>
 
         <div className="messages-container">
-
           {messages.map((msg, index) => (
-
             <div
               key={index}
               className={`message-row ${msg.role}`}
             >
-
               {msg.role === "assistant" && (
-
                 <img
                   src="/wokai-assistant.png"
                   alt="WokAI Assistant"
                   className="bot-avatar"
                 />
-
               )}
 
               <div className="message-bubble">
-
                 {msg.role === "assistant" ? (
-                  <ReactMarkdown>
-                    {msg.text}
-                  </ReactMarkdown>
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
                 ) : (
                   msg.text
                 )}
-
               </div>
-
             </div>
-
           ))}
 
-          {/* TYPING INDICATOR */}
-
+          {/* Typing indicator */}
           {loading && (
-
             <div className="message-row assistant">
-
               <img
                 src="/wokai-assistant.png"
                 alt="WokAI"
@@ -264,7 +235,6 @@ function App() {
               />
 
               <div className="message-bubble typing-bubble">
-
                 WokAI is typing
 
                 <span className="typing-dots">
@@ -272,23 +242,15 @@ function App() {
                   <i></i>
                   <i></i>
                 </span>
-
               </div>
-
             </div>
-
           )}
-
         </div>
-
       </main>
 
-      {/* QUICK ACTIONS */}
-
+      {/* Quick actions */}
       <section className="quick-actions">
-
         {quickActions.map((action) => (
-
           <button
             key={action.label}
             onClick={() => sendMessage(action.message)}
@@ -298,29 +260,21 @@ function App() {
             <span>{action.icon}</span>
             {action.label}
           </button>
-
         ))}
-
       </section>
 
-      {/* CHAT INPUT */}
-
+      {/* Chat input */}
       <footer className="chat-footer">
-
         <form
           className="input-wrapper"
           onSubmit={handleSubmit}
         >
-
           <textarea
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
-              if (
-                e.key === "Enter" &&
-                !e.shiftKey
-              ) {
+              if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 handleSubmit(e);
               }
@@ -338,15 +292,12 @@ function App() {
           >
             ➤
           </button>
-
         </form>
 
         <p className="footer-note">
           Powered by WokAI · The Wok Chinese Kitchen
         </p>
-
       </footer>
-
     </div>
   );
 }
