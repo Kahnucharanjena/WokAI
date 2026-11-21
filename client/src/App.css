@@ -1,0 +1,1075 @@
+
+/* =========================================
+   WOKAI - COMPLETE CHAT INTERFACE
+========================================= */
+
+.wokai-app {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f8f0e6;
+  color: #43271c;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.top-header {
+  height: 114px;
+  min-height: 114px;
+  padding: 0 4.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  background: linear-gradient(
+    110deg,
+    #351b11,
+    #71371f
+  );
+
+  border-bottom: 3px solid #e84b20;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  z-index: 5;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+
+.brand-logo {
+  width: 82px;
+  height: 75px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-text h1 {
+  margin: 0;
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.brand-text p {
+  margin: 4px 0 0;
+  color: #e8cbbb;
+  font-size: 17px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.online-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #a4f078;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 11px;
+  height: 11px;
+  background: #80e66a;
+  border-radius: 50%;
+  box-shadow: 0 0 9px #80e66a;
+}
+
+.new-chat-button {
+  padding: 17px 24px;
+  border: 1px solid #a66c4e;
+  border-radius: 13px;
+  color: white;
+  background: transparent;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.new-chat-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.new-chat-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.website-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 19px 26px;
+  border-radius: 13px;
+  color: white;
+
+  background: linear-gradient(
+    110deg,
+    #fa5022,
+    #c93417
+  );
+
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 5px 15px rgba(225, 65, 28, 0.2);
+  transition: 0.25s;
+}
+
+.website-button:hover {
+  background: #ff5a2a;
+  transform: translateY(-2px);
+}
+
+.website-button span {
+  font-size: 23px;
+}
+
+/* =========================================
+   CHAT AREA - INDEPENDENT SCROLL
+========================================= */
+
+.chat-area {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+
+  padding: 30px 5% 35px;
+
+  background: #f8f0e6;
+  background-image: none !important;
+
+  scroll-behavior: smooth;
+}
+
+.date-label {
+  text-align: center;
+  margin-bottom: 36px;
+  color: #9b816e;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.messages-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 15px;
+}
+
+/* =========================================
+   MESSAGE ROWS
+========================================= */
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.message-row.assistant {
+  justify-content: flex-start;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+/* =========================================
+   ROBOT AVATAR
+========================================= */
+
+.bot-avatar {
+  width: 145px;
+  height: 155px;
+  flex-shrink: 0;
+
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0;
+}
+
+/* =========================================
+   MESSAGE BUBBLES
+========================================= */
+
+.message-bubble {
+  max-width: 78%;
+  padding: 17px 25px;
+
+  border-radius: 21px;
+
+  font-size: 18px;
+  line-height: 1.65;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+
+  box-shadow: 0 6px 20px rgba(65, 35, 20, 0.04);
+}
+
+.message-row.assistant .message-bubble {
+  background: #ffffff;
+  color: #482b1f;
+  border-bottom-left-radius: 6px;
+}
+
+.message-row.user .message-bubble {
+  background: #a94729;
+  color: #ffffff;
+  border-bottom-right-radius: 6px;
+}
+
+/* =========================================
+   MARKDOWN FORMATTING
+========================================= */
+
+.message-bubble p {
+  margin: 0 0 12px;
+}
+
+.message-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.message-bubble h1,
+.message-bubble h2,
+.message-bubble h3,
+.message-bubble h4 {
+  margin: 15px 0 10px;
+  font-weight: 700;
+}
+
+.message-bubble h1 {
+  font-size: 24px;
+}
+
+.message-bubble h2 {
+  font-size: 21px;
+}
+
+.message-bubble h3 {
+  font-size: 19px;
+}
+
+.message-bubble ul,
+.message-bubble ol {
+  padding-left: 25px;
+  margin: 12px 0;
+}
+
+.message-bubble li {
+  margin-bottom: 7px;
+}
+
+.message-bubble strong {
+  font-weight: 700;
+}
+
+.message-bubble a {
+  color: #c74622;
+  text-decoration: underline;
+}
+
+.message-bubble hr {
+  border: none;
+  border-top: 1px solid #ead9ca;
+  margin: 14px 0;
+}
+
+.message-bubble pre {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  background: #f7eee5;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.message-bubble code {
+  font-size: 0.9em;
+}
+
+/* =========================================
+   TYPING INDICATOR
+========================================= */
+
+.typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #987c68 !important;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.typing-dots i {
+  width: 7px;
+  height: 7px;
+  background: #b55332;
+  border-radius: 50%;
+  animation: typing 1.2s infinite;
+}
+
+.typing-dots i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.quick-actions {
+  flex-shrink: 0;
+  min-height: 116px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 15px;
+  padding: 17px 15px;
+
+  background: #f8f0e6;
+  border-top: 1px solid #ead9ca;
+  border-bottom: 1px solid #ead9ca;
+
+  position: relative;
+  z-index: 5;
+}
+
+.quick-actions button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 25px;
+
+  border: 1px solid #d9bda8;
+  border-radius: 35px;
+
+  background: #fffdfb;
+  color: #673b29;
+
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.quick-actions button:hover:not(:disabled) {
+  background: #f1dfd0;
+  border-color: #b87855;
+  transform: translateY(-2px);
+}
+
+.quick-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quick-actions button span {
+  font-size: 20px;
+}
+
+/* =========================================
+   CHAT FOOTER
+========================================= */
+
+.chat-footer {
+  flex-shrink: 0;
+  padding: 17px 7% 12px;
+
+  background: #fffaf5;
+  border-top: 1px solid #ead9ca;
+
+  position: relative;
+  z-index: 5;
+}
+
+.input-wrapper {
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.input-wrapper textarea {
+  flex: 1;
+  min-width: 0;
+
+  min-height: 64px;
+  max-height: 120px;
+
+  resize: none;
+
+  padding: 18px 25px;
+
+  border: 1px solid #dfc5b2;
+  border-radius: 40px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #492d20;
+
+  font-size: 17px;
+  line-height: 1.5;
+
+  transition: 0.2s;
+}
+
+.input-wrapper textarea:focus {
+  border-color: #a94729;
+  box-shadow: 0 0 0 3px rgba(169, 71, 41, 0.08);
+}
+
+.input-wrapper textarea::placeholder {
+  color: #a38a76;
+}
+
+.send-button {
+  width: 65px;
+  height: 65px;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #ce9083;
+  color: white;
+
+  font-size: 29px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.send-button:hover:not(:disabled) {
+  background: #ad4b30;
+  transform: scale(1.05);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.footer-note {
+  margin: 12px 0 0;
+  text-align: center;
+  color: #997e6c;
+  font-size: 13px;
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.chat-area::-webkit-scrollbar {
+  width: 7px;
+}
+
+.chat-area::-webkit-scrollbar-thumb {
+  background: #d4b9a5;
+  border-radius: 10px;
+}
+
+.chat-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 950px) {
+
+  .top-header {
+    padding: 0 3%;
+  }
+
+  .brand-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .brand-text h1 {
+    font-size: 27px;
+  }
+
+  .brand-text p {
+    font-size: 13px;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .website-button {
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .new-chat-button {
+    padding: 13px;
+    font-size: 13px;
+  }
+
+  .online-status {
+    font-size: 13px;
+  }
+
+  .bot-avatar {
+    width: 105px;
+    height: 115px;
+  }
+
+  .message-bubble {
+    font-size: 15px;
+  }
+
+  .quick-actions button {
+    padding: 12px 17px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .top-header {
+    height: 76px;
+    min-height: 76px;
+    padding: 0 12px;
+    gap: 5px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 43px;
+    height: 43px;
+  }
+
+  .brand-text h1 {
+    font-size: 20px;
+  }
+
+  .brand-text p {
+    font-size: 9px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .online-status,
+  .new-chat-button {
+    display: none;
+  }
+
+  .website-button {
+    padding: 10px 9px;
+    font-size: 10px;
+    gap: 5px;
+  }
+
+  .website-button span {
+    font-size: 14px;
+  }
+
+  .chat-area {
+    padding: 18px 12px 25px;
+  }
+
+  .date-label {
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+
+  .message-row {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .bot-avatar {
+    width: 65px;
+    height: 75px;
+  }
+
+  .message-bubble {
+    max-width: 85%;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .message-bubble h1 {
+    font-size: 19px;
+  }
+
+  .message-bubble h2 {
+    font-size: 17px;
+  }
+
+  .message-bubble h3 {
+    font-size: 15px;
+  }
+
+  .quick-actions {
+    min-height: 0;
+    padding: 12px 6px;
+    gap: 7px;
+  }
+
+  .quick-actions button {
+    padding: 9px 11px;
+    font-size: 11px;
+    gap: 5px;
+  }
+
+  .quick-actions button span {
+    font-size: 13px;
+  }
+
+  .chat-footer {
+    padding: 11px 10px;
+  }
+
+  .input-wrapper {
+    gap: 8px;
+  }
+
+  .input-wrapper textarea {
+    min-height: 49px;
+    padding: 13px 15px;
+    font-size: 13px;
+  }
+
+  .send-button {
+    width: 49px;
+    height: 49px;
+    font-size: 21px;
+  }
+
+  .footer-note {
+    font-size: 10px;
+  }
+}
+
+
+/* ===== WOKAI FINAL LAYOUT FIX ===== */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.wokai-app {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header stays at top */
+.top-header {
+  flex: 0 0 114px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Only messages scroll */
+.chat-area {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Messages */
+.messages-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Quick actions always visible */
+.quick-actions {
+  flex: 0 0 auto;
+  min-height: 90px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Input stays at bottom */
+.chat-footer {
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 5;
+  padding: 14px 7% 10px;
+}
+
+/* Keep footer visible on smaller screens */
+@media (max-height: 650px) {
+  .top-header {
+    flex-basis: 75px;
+  }
+
+  .quick-actions {
+    min-height: 65px;
+    padding: 8px;
+  }
+
+  .chat-footer {
+    padding: 8px 4%;
+  }
+
+  .input-wrapper textarea {
+    min-height: 48px;
+  }
+
+  .send-button {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+
+/* =================================
+   WOKAI RESPONSIVE IMPROVEMENTS
+================================= */
+
+/* Prevent unwanted horizontal scrolling */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+.wokai-app {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Chat scrolling */
+
+.chat-area {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.messages-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.message-bubble {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble p:first-child {
+  margin-top: 0;
+}
+
+.message-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.message-bubble img {
+  max-width: 100%;
+}
+
+.message-bubble pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Tablet */
+
+@media (max-width: 950px) {
+
+  .top-header {
+    padding: 0 18px;
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-logo {
+    width: 55px;
+    height: 55px;
+  }
+
+  .brand-text h1 {
+    font-size: 25px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .online-status {
+    font-size: 13px;
+  }
+
+  .website-button {
+    padding: 13px;
+    font-size: 12px;
+  }
+
+  .bot-avatar {
+    width: 95px;
+    height: 105px;
+  }
+
+  .message-bubble {
+    max-width: 85%;
+  }
+
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .wokai-app {
+    height: 100dvh;
+    height: 100svh;
+  }
+
+  .top-header {
+    height: 72px;
+    min-height: 72px;
+    padding: 0 10px;
+    gap: 5px;
+  }
+
+  .brand {
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-text h1 {
+    font-size: 19px;
+  }
+
+  .brand-text p {
+    font-size: 9px;
+  }
+
+  .header-actions {
+    gap: 5px;
+  }
+
+  .online-status {
+    display: none;
+  }
+
+  .new-chat-button {
+    display: none;
+  }
+
+  .website-button {
+    padding: 10px 9px;
+    font-size: 9px;
+    gap: 4px;
+    border-radius: 9px;
+  }
+
+  .website-button span {
+    font-size: 13px;
+  }
+
+  .chat-area {
+    padding: 16px 10px;
+  }
+
+  .date-label {
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+
+  .message-row {
+    gap: 7px;
+    margin-bottom: 20px;
+  }
+
+  .bot-avatar {
+    width: 58px;
+    height: 68px;
+    object-fit: contain;
+  }
+
+  .message-bubble {
+    max-width: calc(100% - 65px);
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    border-radius: 16px;
+  }
+
+  .quick-actions {
+    min-height: 0;
+    padding: 10px 7px;
+    gap: 7px;
+  }
+
+  .quick-actions button {
+    padding: 9px 10px;
+    font-size: 10px;
+    gap: 5px;
+    border-radius: 25px;
+  }
+
+  .quick-actions button span {
+    font-size: 13px;
+  }
+
+  .chat-footer {
+    padding: 10px 9px 8px;
+  }
+
+  .input-wrapper {
+    gap: 7px;
+  }
+
+  .input-wrapper textarea {
+    min-height: 48px;
+    max-height: 100px;
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+
+  .send-button {
+    width: 47px;
+    height: 47px;
+    font-size: 20px;
+  }
+
+  .footer-note {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+}
+
+/* Very small mobile screens */
+
+@media (max-width: 380px) {
+
+  .brand-text p {
+    display: none;
+  }
+
+  .brand-text h1 {
+    font-size: 17px;
+  }
+
+  .website-button {
+    font-size: 8px;
+    padding: 9px 7px;
+  }
+
+  .quick-actions {
+    gap: 5px;
+  }
+
+  .quick-actions button {
+    padding: 8px 7px;
+    font-size: 9px;
+  }
+
+  .bot-avatar {
+    width: 48px;
+    height: 58px;
+  }
+
+  .message-bubble {
+    max-width: calc(100% - 55px);
+  }
+
+}

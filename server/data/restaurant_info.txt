@@ -1,0 +1,35 @@
+
+RESTAURANT: THE WOK – CHINESE KITCHEN
+
+ABOUT:
+Authentic Chinese kitchen serving sizzling wok dishes,
+handcrafted dim sums, and traditional noodles.
+
+CONTACT:
+Email: hello@thewok.com
+Phone: +91 (123) 456 789
+Address: 55 Main Street, Food Hub Street, India
+
+OPENING HOURS:
+Monday–Friday: 11:00 AM – 10:30 PM
+Saturday–Sunday: 10:30 AM – 11:30 PM
+
+MENU CATEGORIES:
+- Dim Sum
+- Noodles
+- Fried Rice
+- Soups
+- Sizzlers
+- Starters
+
+MENU DATA:
+The website database currently contains two entries,
+but they appear to be sample records.
+Do not present them as confirmed restaurant dishes.
+Ask the customer to contact the restaurant for verified
+menu items and prices.
+
+RESERVATIONS:
+The website provides a table reservation form.
+Customers submit their booking details for staff confirmation.
+Never claim a reservation is confirmed automatically.
