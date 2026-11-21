@@ -18,29 +18,33 @@ load_dotenv(ROOT_DIR / ".env")
 
 
 # ==========================================
-# 2. FLASK APPLICATION
+# 2. FLASK APPLICATION & CORS CONFIGURATION
 # ==========================================
 
 app = Flask(__name__)
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "")
+FRONTEND_URL = os.getenv(
+    "FRONTEND_URL",
+    "https://wokai-frontend.onrender.com"
+)
 
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://wokai-frontend.onrender.com",
 ]
-
-if FRONTEND_URL:
-    ALLOWED_ORIGINS.append(FRONTEND_URL.rstrip("/"))
 
 CORS(
     app,
     resources={
-        r"/api/*": {
-            "origins": ALLOWED_ORIGINS
+        r"/api/.*": {
+            "origins": ALLOWED_ORIGINS,
+            "methods": ["GET", "POST", "OPTIONS"],
+            "allow_headers": ["Content-Type"],
         }
     }
 )
+
 
 
 # ==========================================
